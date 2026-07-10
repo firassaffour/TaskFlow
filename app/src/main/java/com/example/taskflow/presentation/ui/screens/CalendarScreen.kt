@@ -1,5 +1,7 @@
-package com.example.taskflow.ui.screens
+package com.example.taskflow.presentation.ui.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.taskflow.data.TaskRepository
+import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import com.example.taskflow.ui.components.FlowCard
 import com.example.taskflow.ui.components.PriorityChip
 import java.time.LocalDate
@@ -25,12 +28,14 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CalendarScreen() {
+fun CalendarScreen(taskViewModel: TaskViewModel) {
     var visibleMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
+    val tasks by taskViewModel.tasks.collectAsState()
 
-    val tasksOnSelectedDay = TaskRepository.tasks.filter { it.dueDate == selectedDate }
+    val tasksOnSelectedDay = tasks.filter { it.dueDate == selectedDate }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Row(
@@ -107,6 +112,7 @@ fun CalendarScreen() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun MonthGrid(
     visibleMonth: YearMonth,

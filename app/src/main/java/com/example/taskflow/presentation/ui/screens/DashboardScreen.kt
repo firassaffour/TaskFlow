@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.domain.models.ProjectType
+import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import com.example.taskflow.ui.components.CircularCompletionRing
 import com.example.taskflow.ui.components.FlowCard
 import com.example.taskflow.ui.components.SectionHeader
@@ -21,8 +24,8 @@ import com.example.taskflow.ui.components.TaskRow
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DashboardScreen(onAddTask: () -> Unit) {
-    val tasks = TaskRepository.tasks
+fun DashboardScreen(onAddTask: () -> Unit, taskViewModel: TaskViewModel) {
+    val tasks by taskViewModel.tasks.collectAsState()
     val completed = tasks.count { it.isCompleted }
     val progressPercent = if (tasks.isEmpty()) 0 else (completed * 100) / tasks.size
 
@@ -87,7 +90,7 @@ fun DashboardScreen(onAddTask: () -> Unit) {
         }
 
         ProjectType.entries.forEach { project ->
-            val projectTasks = TaskRepository.tasksFor(project)
+            val projectTasks = TaskRepository.tasksFor(project, tasks)
             if (projectTasks.isNotEmpty()) {
                 item {
                     FlowCard(
@@ -97,7 +100,8 @@ fun DashboardScreen(onAddTask: () -> Unit) {
                         SectionHeader(project.label, projectTasks.size)
                         Spacer(Modifier.height(4.dp))
                         projectTasks.take(4).forEach { task ->
-                            TaskRow(task = task, onToggle = { TaskRepository.toggleComplete(task.id) })
+                            val currentTask = task.copy(isCompleted = !task.isCompleted)
+                            TaskRow(task = task, onToggle = { taskViewModel.addTask(currentTask) })
                         }
                         if (projectTasks.size > 4) {
                             TextButton(onClick = { }) {

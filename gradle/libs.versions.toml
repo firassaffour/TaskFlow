@@ -12,6 +12,7 @@ navigation-compose = "2.9.5"
 accompanist = "0.30.1"
 room = "2.7.2"
 ksp = "2.0.21-1.0.27"
+gson = "2.10.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +31,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material = { group = "androidx.compose.material", name = "material-icons-extended" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref= "navigation-compose" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 accompanist = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }

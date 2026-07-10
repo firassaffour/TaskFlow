@@ -1,4 +1,4 @@
-package com.example.taskflow.ui.screens
+package com.example.taskflow.presentation.ui.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.presentation.viewmodel.AnalyticsEngine
 import com.example.taskflow.domain.models.ProjectType
+import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import com.example.taskflow.ui.components.FlowCard
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -25,8 +28,8 @@ import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AnalyticsScreen() {
-    val tasks = TaskRepository.tasks
+fun AnalyticsScreen(taskViewModel: TaskViewModel) {
+    val tasks by taskViewModel.tasks.collectAsState()
     val today = LocalDate.now()
 
     val totalCompleted = AnalyticsEngine.totalCompleted(tasks)

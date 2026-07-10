@@ -1,5 +1,7 @@
 package com.example.taskflow.domain.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -20,7 +22,9 @@ enum class ProjectType(val label: String) {
  * it is the field the analytics/streak engine reads from, NOT [isCompleted]
  * alone, because we need to know *which day* a task was completed on.
  */
+@Entity
 data class Task(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
     val description: String = "",

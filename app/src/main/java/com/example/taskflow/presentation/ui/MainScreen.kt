@@ -2,7 +2,6 @@ package com.example.taskflow.presentation.ui
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -20,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.taskflow.presentation.ui.screens.AddTaskScreen
-import com.example.taskflow.ui.screens.AnalyticsScreen
-import com.example.taskflow.ui.screens.CalendarScreen
+import com.example.taskflow.presentation.ui.screens.AnalyticsScreen
+import com.example.taskflow.presentation.ui.screens.CalendarScreen
 import com.example.taskflow.presentation.ui.screens.DashboardScreen
+import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import com.example.taskflow.ui.screens.ProfileScreen
 
 private enum class Tab(val label: String) {
@@ -33,7 +32,7 @@ private enum class Tab(val label: String) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreen(navController : NavHostController, currentRoute : String?) {
+fun MainScreen(navController : NavHostController, currentRoute : String?, taskViewModel: TaskViewModel) {
     var selectedTab by remember { mutableStateOf(Tab.HOME) }
     var showAddTask by remember { mutableStateOf(false) }
 
@@ -50,7 +49,7 @@ fun MainScreen(navController : NavHostController, currentRoute : String?) {
         },
         bottomBar = {
             if (currentRoute != Tab.ADDTASK.label) {
-                NavigationBar {
+                NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
                     NavigationBarItem(
                         selected = currentRoute == Tab.HOME.label,
                         onClick = { navController.navigate(Tab.HOME.label){
@@ -101,11 +100,11 @@ fun MainScreen(navController : NavHostController, currentRoute : String?) {
             startDestination = Tab.HOME.label,
             modifier = Modifier.padding(padding)
         ) {
-            composable(Tab.HOME.label) {  DashboardScreen(onAddTask = { }) }
-            composable(Tab.CALENDAR.label) { CalendarScreen() }
-            composable(Tab.ANALYTICS.label) {  AnalyticsScreen() }
+            composable(Tab.HOME.label) {  DashboardScreen(onAddTask = { }, taskViewModel) }
+            composable(Tab.CALENDAR.label) { CalendarScreen(taskViewModel) }
+            composable(Tab.ANALYTICS.label) {  AnalyticsScreen(taskViewModel) }
             composable(Tab.PROFILE.label) {  ProfileScreen() }
-            composable(Tab.ADDTASK.label) {  AddTaskScreen(onTaskCreated = {}, navController)}
+            composable(Tab.ADDTASK.label) {  AddTaskScreen(onTaskCreated = {navController.popBackStack()}, navController, taskViewModel)}
         }
     }
 }

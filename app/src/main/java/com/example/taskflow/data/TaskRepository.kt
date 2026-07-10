@@ -142,5 +142,5 @@ object TaskRepository {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun tasksFor(project: ProjectType) = tasks.filter { it.project == project }
+    fun tasksFor(project: ProjectType, tasks : List<Task>) = tasks.filter { it.project == project }
 }
