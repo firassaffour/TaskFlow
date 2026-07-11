@@ -100,7 +100,7 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
             startDestination = Tab.HOME.label,
             modifier = Modifier.padding(padding)
         ) {
-            composable(Tab.HOME.label) {  DashboardScreen(onAddTask = { }, taskViewModel) }
+            composable(Tab.HOME.label) {  DashboardScreen(taskViewModel) }
             composable(Tab.CALENDAR.label) { CalendarScreen(taskViewModel) }
             composable(Tab.ANALYTICS.label) {  AnalyticsScreen(taskViewModel) }
             composable(Tab.PROFILE.label) {  ProfileScreen() }

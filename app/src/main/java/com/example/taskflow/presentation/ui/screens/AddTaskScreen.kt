@@ -16,14 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.domain.models.Priority
 import com.example.taskflow.domain.models.ProjectType
 import java.time.LocalDate
 import androidx.compose.material.icons.filled.ArrowBack
 import com.example.taskflow.domain.models.Task
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
-import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -110,7 +108,6 @@ fun AddTaskScreen(onTaskCreated: () -> Unit, navController: NavHostController, t
         Button(
             onClick = {
                 if (title.isNotBlank()) {
-                    TaskRepository.addTask(title, description, dueDate, priority, project)
                     val task = Task(
                         id = 0,
                         title = title,

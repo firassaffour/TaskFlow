@@ -21,7 +21,7 @@ import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.presentation.viewmodel.AnalyticsEngine
 import com.example.taskflow.domain.models.ProjectType
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
-import com.example.taskflow.ui.components.FlowCard
+import com.example.taskflow.presentation.ui.components.FlowCard
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale

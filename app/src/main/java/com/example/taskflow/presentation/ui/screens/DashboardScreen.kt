@@ -14,17 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.domain.models.ProjectType
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
-import com.example.taskflow.ui.components.CircularCompletionRing
-import com.example.taskflow.ui.components.FlowCard
-import com.example.taskflow.ui.components.SectionHeader
-import com.example.taskflow.ui.components.TaskRow
+import com.example.taskflow.presentation.ui.components.CircularCompletionRing
+import com.example.taskflow.presentation.ui.components.FlowCard
+import com.example.taskflow.presentation.ui.components.SectionHeader
+import com.example.taskflow.presentation.ui.components.TaskRow
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DashboardScreen(onAddTask: () -> Unit, taskViewModel: TaskViewModel) {
+fun DashboardScreen(taskViewModel: TaskViewModel) {
     val tasks by taskViewModel.tasks.collectAsState()
     val completed = tasks.count { it.isCompleted }
     val progressPercent = if (tasks.isEmpty()) 0 else (completed * 100) / tasks.size
@@ -90,7 +89,7 @@ fun DashboardScreen(onAddTask: () -> Unit, taskViewModel: TaskViewModel) {
         }
 
         ProjectType.entries.forEach { project ->
-            val projectTasks = TaskRepository.tasksFor(project, tasks)
+            val projectTasks = tasks.filter { it.project == project }
             if (projectTasks.isNotEmpty()) {
                 item {
                     FlowCard(
