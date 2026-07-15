@@ -24,7 +24,8 @@ import com.example.taskflow.presentation.ui.screens.AnalyticsScreen
 import com.example.taskflow.presentation.ui.screens.CalendarScreen
 import com.example.taskflow.presentation.ui.screens.DashboardScreen
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
-import com.example.taskflow.ui.screens.ProfileScreen
+import com.example.taskflow.presentation.ui.screens.ProfileScreen
+import com.example.taskflow.presentation.viewmodel.ProfileViewModel
 
 private enum class Tab(val label: String) {
     HOME("Home"), CALENDAR("Calendar"), ANALYTICS("Analytics"), PROFILE("Profile"), ADDTASK("addtask")
@@ -32,7 +33,7 @@ private enum class Tab(val label: String) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreen(navController : NavHostController, currentRoute : String?, taskViewModel: TaskViewModel) {
+fun MainScreen(navController : NavHostController, currentRoute : String?, taskViewModel: TaskViewModel, profileViewModel: ProfileViewModel) {
     var selectedTab by remember { mutableStateOf(Tab.HOME) }
     var showAddTask by remember { mutableStateOf(false) }
 
@@ -42,14 +43,16 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
             if (currentRoute == Tab.HOME.label) {
                 FloatingActionButton(onClick = {
                     navController.navigate(Tab.ADDTASK.label)
-                    showAddTask = true}) {
+                    showAddTask = true},
+                    containerColor = MaterialTheme.colorScheme.primary) {
                     Icon(Icons.Filled.Add, contentDescription = "Add task")
                 }
             }
         },
         bottomBar = {
             if (currentRoute != Tab.ADDTASK.label) {
-                NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
+                NavigationBar(
+                    containerColor = MaterialTheme.colorScheme.background) {
                     NavigationBarItem(
                         selected = currentRoute == Tab.HOME.label,
                         onClick = { navController.navigate(Tab.HOME.label){
@@ -58,7 +61,8 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
                             restoreState = true
                         } },
                         icon = { Icon(Icons.Filled.Home, contentDescription = null) },
-                        label = { Text("Home") }
+                        label = { Text("Home") },
+                        colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.surface)
                     )
                     NavigationBarItem(
                         selected = currentRoute == Tab.CALENDAR.label,
@@ -68,7 +72,8 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
                             restoreState = true
                         } },
                         icon = { Icon(Icons.Filled.CalendarMonth, contentDescription = null) },
-                        label = { Text("Calendar") }
+                        label = { Text("Calendar") },
+                        colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.surface)
                     )
                     NavigationBarItem(
                         selected = currentRoute == Tab.ANALYTICS.label,
@@ -78,7 +83,8 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
                             restoreState = true
                         } },
                         icon = { Icon(Icons.Filled.QueryStats, contentDescription = null) },
-                        label = { Text("Analytics") }
+                        label = { Text("Analytics") },
+                        colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.surface)
                     )
                     NavigationBarItem(
                         selected = currentRoute == Tab.PROFILE.label,
@@ -88,7 +94,8 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
                             restoreState = true
                         } },
                         icon = { Icon(Icons.Filled.Person, contentDescription = null) },
-                        label = { Text("Profile") }
+                        label = { Text("Profile") },
+                        colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.surface)
                     )
                 }
             }
@@ -100,10 +107,10 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
             startDestination = Tab.HOME.label,
             modifier = Modifier.padding(padding)
         ) {
-            composable(Tab.HOME.label) {  DashboardScreen(taskViewModel) }
+            composable(Tab.HOME.label) {  DashboardScreen(taskViewModel, profileViewModel) }
             composable(Tab.CALENDAR.label) { CalendarScreen(taskViewModel) }
             composable(Tab.ANALYTICS.label) {  AnalyticsScreen(taskViewModel) }
-            composable(Tab.PROFILE.label) {  ProfileScreen() }
+            composable(Tab.PROFILE.label) {  ProfileScreen(taskViewModel, profileViewModel) }
             composable(Tab.ADDTASK.label) {  AddTaskScreen(onTaskCreated = {navController.popBackStack()}, navController, taskViewModel)}
         }
     }

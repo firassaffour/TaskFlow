@@ -54,13 +54,18 @@ dependencies {
     implementation(libs.androidx.material)
     implementation(libs.navigation.compose)
     implementation(libs.accompanist)
+    // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    testImplementation(libs.junit.junit)
+    testImplementation(libs.junit.junit)
     ksp(libs.room.compiler)
+    // Hilt
     implementation(libs.gson)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

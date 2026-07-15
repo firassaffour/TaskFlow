@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.taskflow.data.TaskRepository
 import com.example.taskflow.presentation.viewmodel.AnalyticsEngine
 import com.example.taskflow.domain.models.ProjectType
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
@@ -30,10 +29,11 @@ import java.util.Locale
 @Composable
 fun AnalyticsScreen(taskViewModel: TaskViewModel) {
     val tasks by taskViewModel.tasks.collectAsState()
+    val currentStreak by taskViewModel.currentStreak.collectAsState()
     val today = LocalDate.now()
 
     val totalCompleted = AnalyticsEngine.totalCompleted(tasks)
-    val streak = AnalyticsEngine.currentStreak(TaskRepository.completionHistory, today)
+    val streak = currentStreak
     val tasksToday = tasks.filter { it.dueDate == today }
     val focusScore = AnalyticsEngine.focusScore(tasksToday, streak)
     val breakdown = AnalyticsEngine.taskBreakdown(tasks)

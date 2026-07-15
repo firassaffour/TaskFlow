@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.taskflow.presentation.viewmodel.ProfileViewModel
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
                 val taskViewModel = hiltViewModel<TaskViewModel>()
+                val profileViewModel = hiltViewModel<ProfileViewModel>()
 
                 SideEffect {
                     systemUiController.setStatusBarColor(Color.White)
@@ -40,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MainScreen(navController, currentRoute, taskViewModel)
+                    MainScreen(navController, currentRoute, taskViewModel, profileViewModel)
                 }
             }
         }

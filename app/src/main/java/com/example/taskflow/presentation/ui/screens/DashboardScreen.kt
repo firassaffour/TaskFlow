@@ -20,11 +20,13 @@ import com.example.taskflow.presentation.ui.components.CircularCompletionRing
 import com.example.taskflow.presentation.ui.components.FlowCard
 import com.example.taskflow.presentation.ui.components.SectionHeader
 import com.example.taskflow.presentation.ui.components.TaskRow
+import com.example.taskflow.presentation.viewmodel.ProfileViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DashboardScreen(taskViewModel: TaskViewModel) {
+fun DashboardScreen(taskViewModel: TaskViewModel, profileViewModel: ProfileViewModel) {
     val tasks by taskViewModel.tasks.collectAsState()
+    val profile by profileViewModel.profile.collectAsState()
     val completed = tasks.count { it.isCompleted }
     val progressPercent = if (tasks.isEmpty()) 0 else (completed * 100) / tasks.size
 
@@ -45,7 +47,7 @@ fun DashboardScreen(taskViewModel: TaskViewModel) {
             ) {
                 Column {
                     Text("Good Morning,", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text("Alex", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                    Text(profile.name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     Text(
                         "You have ${tasks.count { !it.isCompleted }} tasks remaining for today.",
                         fontSize = 12.sp,
@@ -94,13 +96,12 @@ fun DashboardScreen(taskViewModel: TaskViewModel) {
                 item {
                     FlowCard(
                         modifier = Modifier.fillMaxWidth(),
-                        backgroundColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+                        backgroundColor = MaterialTheme.colorScheme.surface
                     ) {
                         SectionHeader(project.label, projectTasks.size)
                         Spacer(Modifier.height(4.dp))
                         projectTasks.take(4).forEach { task ->
-                            val currentTask = task.copy(isCompleted = !task.isCompleted)
-                            TaskRow(task = task, onToggle = { taskViewModel.addTask(currentTask) })
+                            TaskRow(task = task, onToggle = { taskViewModel.toggleComplete(task) })
                         }
                         if (projectTasks.size > 4) {
                             TextButton(onClick = { }) {
