@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "package com.example.taskflow.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.room.ktx)
     testImplementation(libs.junit.junit)
     testImplementation(libs.junit.junit)
+    testImplementation(libs.junit.junit)
     ksp(libs.room.compiler)
     // Hilt
     implementation(libs.gson)
@@ -73,4 +74,13 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(kotlin("test"))
+    androidTestImplementation(kotlin("test"))
+    androidTestImplementation(kotlin("test"))
+
+    //hilt
+    testImplementation(libs.hilt.android.testing)
+    kspTest(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
 }

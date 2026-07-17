@@ -1,15 +1,13 @@
 package com.example.taskflow.domain.usecase
 
 import com.example.taskflow.data.repository.FakeTaskRepository
-import com.example.taskflow.data.repository.TaskRepositoryImpl
 import com.example.taskflow.domain.models.Task
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import java.time.LocalDateTime
+import kotlin.test.assertEquals
 
 class GetTasksUseCaseTest {
 
@@ -39,8 +37,8 @@ class GetTasksUseCaseTest {
  }
 
  @Test
- fun getTasksUseCaseTest() = runBlocking {
+ fun `getTasks UseCase returns tasks`() = runBlocking {
   val tasks = getTasksUseCase().first()
-
+  assertEquals(26, tasks.size)
  }
 }

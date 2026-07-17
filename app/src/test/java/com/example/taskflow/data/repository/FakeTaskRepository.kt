@@ -26,10 +26,7 @@ class FakeTaskRepository : TaskRepository {
     }
 
     override suspend fun toggleComplete(task: Task) {
-        tasks.map {
-            if (it.id == task.id) {
-                it.copy(isCompleted = !it.isCompleted)
-            } else it
-        }
+        val index = tasks.indexOfFirst { it.id == task.id }
+        tasks[index] = tasks[index].copy(isCompleted = !tasks[index].isCompleted)
     }
 }
