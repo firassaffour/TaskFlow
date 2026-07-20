@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +47,7 @@ fun DashboardScreen(taskViewModel: TaskViewModel, profileViewModel: ProfileViewM
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text("Good Morning,", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Good Morning,", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier =  Modifier.testTag("Good Morning,"))
                     Text(profile.name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     Text(
                         "You have ${tasks.count { !it.isCompleted }} tasks remaining for today.",

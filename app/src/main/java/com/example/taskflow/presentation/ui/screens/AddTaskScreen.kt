@@ -20,6 +20,7 @@ import com.example.taskflow.domain.models.Priority
 import com.example.taskflow.domain.models.ProjectType
 import java.time.LocalDate
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.ui.platform.testTag
 import com.example.taskflow.domain.models.Task
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
 
@@ -55,7 +56,7 @@ fun AddTaskScreen(onTaskCreated: () -> Unit, navController: NavHostController, t
             value = title,
             onValueChange = { title = it },
             placeholder = { Text("What needs to be done?") },
-            modifier = Modifier.fillMaxWidth().padding(top = 6.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp).testTag("TITLE_FIELD")
         )
 
         Spacer(Modifier.height(16.dp))
@@ -68,6 +69,7 @@ fun AddTaskScreen(onTaskCreated: () -> Unit, navController: NavHostController, t
                 .fillMaxWidth()
                 .height(90.dp)
                 .padding(top = 6.dp)
+                .testTag("DESCRIPTION_FIELD")
         )
 
         Spacer(Modifier.height(16.dp))
@@ -121,7 +123,7 @@ fun AddTaskScreen(onTaskCreated: () -> Unit, navController: NavHostController, t
                     onTaskCreated()
                 }
             },
-            modifier = Modifier.fillMaxWidth().height(50.dp),
+            modifier = Modifier.fillMaxWidth().height(50.dp).testTag("ADD_TASK_BUTTON"),
             shape = RoundedCornerShape(14.dp)
         ) {
             Text("+  Create Task", fontWeight = FontWeight.Bold)
@@ -144,6 +146,7 @@ private fun ChoiceChip(
             .background(bg)
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 10.dp)
+            .testTag(label)
     ) {
         Text(label, color = fg, fontSize = 13.sp, fontWeight = FontWeight.Medium)
     }

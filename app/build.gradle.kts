@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "package com.example.taskflow.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.taskflow.HiltTestRunner"
     }
 
     buildTypes {
@@ -83,4 +83,7 @@ dependencies {
     kspTest(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
+
+    // mockito
+    testImplementation(libs.mockito.kotlin)
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -88,7 +89,7 @@ fun TaskRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Checkbox(checked = task.isCompleted, onCheckedChange = { onToggle() })
+        Checkbox(checked = task.isCompleted, onCheckedChange = { onToggle() }, Modifier.testTag("Check_box"))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 task.title,
