@@ -1,5 +1,6 @@
 package com.example.taskflow.presentation.ui.screens
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
@@ -21,17 +22,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.taskflow.data.DataStoreManager
 import com.example.taskflow.presentation.ui.components.FlowCard
 import com.example.taskflow.presentation.viewmodel.AnalyticsEngine
 import com.example.taskflow.presentation.viewmodel.ProfileViewModel
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -44,6 +48,9 @@ fun ProfileScreen(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+
+    val dataStoreManager = DataStoreManager(context)
+    val darkMode by dataStoreManager.getDarkMode().collectAsState(initial = false)
 
     val profile by profileViewModel.profile.collectAsState()
     val tasks by taskViewModel.tasks.collectAsState()
@@ -172,6 +179,18 @@ fun ProfileScreen(
                 )
             }
         }
+
+        Spacer(Modifier.height(16.dp))
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Dark Mode", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+            Spacer(Modifier.weight(1f))
+
+            Switch(checked = darkMode, onCheckedChange = { isChecked ->
+                profileViewModel.setDarkMode(isChecked, context)
+             })
+        }
     }
 }
 
@@ -192,6 +211,7 @@ private fun ProfileAvatar(imagePath: String?, modifier: Modifier = Modifier) {
             Image(
                 bitmap = bitmap,
                 contentDescription = "Profile photo",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
         } else {

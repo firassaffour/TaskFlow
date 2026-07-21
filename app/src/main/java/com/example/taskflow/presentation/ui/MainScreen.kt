@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -45,7 +46,7 @@ fun MainScreen(navController : NavHostController, currentRoute : String?, taskVi
                     navController.navigate(Tab.ADDTASK.label)
                     showAddTask = true},
                     containerColor = MaterialTheme.colorScheme.primary) {
-                    Icon(Icons.Filled.Add, contentDescription = "Add task")
+                    Icon(Icons.Filled.Add, contentDescription = "Add task", tint = Color.White)
                 }
             }
         },

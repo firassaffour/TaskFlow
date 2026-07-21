@@ -1,8 +1,10 @@
 package com.example.taskflow.presentation.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.taskflow.data.DataStoreManager
 import com.example.taskflow.domain.models.UserProfile
 import com.example.taskflow.domain.repository.UserProfileRepository
 import com.example.taskflow.domain.usecase.GetProfileUseCase
@@ -22,6 +24,7 @@ class ProfileViewModel @Inject constructor(
     val profile = getProfileUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserProfile())
 
+
     fun updateName(name: String) {
         val trimmed = name.trim()
         if (trimmed.isEmpty()) return
@@ -40,6 +43,17 @@ class ProfileViewModel @Inject constructor(
                 updateProfileUseCase(profile.value.copy(imagePath = imagePath))
             } catch (e: Exception) {
                 Log.e("ProfileViewModel", "updateImage error: ${e.message}")
+            }
+        }
+    }
+
+    fun setDarkMode(enabled: Boolean, context: Context) {
+        viewModelScope.launch {
+            try {
+                val dataStoreManager = DataStoreManager(context)
+                dataStoreManager.setDarkMode(enabled)
+            } catch (e: Exception) {
+                Log.e("ProfileViewModel", "setDarkMode error: ${e.message}")
             }
         }
     }

@@ -20,6 +20,7 @@ import com.example.taskflow.domain.models.Priority
 import com.example.taskflow.domain.models.ProjectType
 import java.time.LocalDate
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import com.example.taskflow.domain.models.Task
 import com.example.taskflow.presentation.viewmodel.TaskViewModel
@@ -126,7 +127,7 @@ fun AddTaskScreen(onTaskCreated: () -> Unit, navController: NavHostController, t
             modifier = Modifier.fillMaxWidth().height(50.dp).testTag("ADD_TASK_BUTTON"),
             shape = RoundedCornerShape(14.dp)
         ) {
-            Text("+  Create Task", fontWeight = FontWeight.Bold)
+            Text("+  Create Task", fontWeight = FontWeight.Bold, color = Color.White)
         }
     }
 }
@@ -139,7 +140,7 @@ private fun ChoiceChip(
     onClick: () -> Unit
 ) {
     val bg = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant
-    val fg = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+    val fg = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
