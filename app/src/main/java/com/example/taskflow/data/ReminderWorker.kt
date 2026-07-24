@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
@@ -35,6 +36,8 @@ class ReminderWorker @AssistedInject constructor(
         if (hasPendingTask) {
             showNotification()
         }
+
+        Log.d("ReminderWorker", "doWork: ${tasks.size}")
 
         return Result.success()
     }

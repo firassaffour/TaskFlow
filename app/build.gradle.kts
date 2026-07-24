@@ -59,18 +59,18 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    implementation(libs.androidx.hilt.common)
-    testImplementation(libs.junit.junit)
-    testImplementation(libs.junit.junit)
-    testImplementation(libs.junit.junit)
     ksp(libs.room.compiler)
     // Hilt
     implementation(libs.gson)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+    // Paging
     // Test
     testImplementation(libs.junit)
+    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -79,14 +79,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(kotlin("test"))
     androidTestImplementation(kotlin("test"))
-    androidTestImplementation(kotlin("test"))
 
-    //hilt
+    //Hilt Test
     testImplementation(libs.hilt.android.testing)
     kspTest(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
 
-    // mockito
+    // Mockito
     testImplementation(libs.mockito.kotlin)
 }
