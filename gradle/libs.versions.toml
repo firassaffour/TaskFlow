@@ -50,8 +50,8 @@ datastore = { group = "androidx.datastore", name = "datastore-preferences", vers
 work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version = "2.9.1" }
 hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltCommon" }
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltCommon" }
-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version = "paging" }
-paging-compose = { group = "androidx.paging", name = "compose", version = "paging" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version = "1.0.0-alpha18" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

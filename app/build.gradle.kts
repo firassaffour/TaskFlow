@@ -68,6 +68,8 @@ dependencies {
     implementation(libs.hilt.work)
     ksp(libs.androidx.hilt.compiler)
     // Paging
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
     // Test
     testImplementation(libs.junit)
     testImplementation(libs.junit.junit)
