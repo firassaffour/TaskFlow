@@ -68,11 +68,11 @@ app/
 ![](screenshots/demo.gif)
 
 | Home | Analytics |
-|------|------|--------
+|------|------|
 | ![](screenshots/home.jpeg) | ![](screenshots/analytics.jpeg) |
 
 | Calendar | add task |
-|-------------|---------|------
+|-------------|---------|
 | ![](screenshots/calendar.jpeg) | ![](screenshots/addtask.jpeg) | 
 
 ## 📚 What I Learned
