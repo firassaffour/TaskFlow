@@ -65,15 +65,15 @@ app/
 
 ## 📸 Screenshots
 
-![](screenshots/demo.gif)
+<img src="screenshots/demo.gif" width="350">
 
 | Home | Analytics |
-|------|------|
-| ![](screenshots/home.jpeg) | ![](screenshots/analytics.jpeg) |
+|------|-----------|
+| <img src="screenshots/home.jpeg" width="250"> | <img src="screenshots/analytics.jpeg" width="250"> |
 
-| Calendar | add task |
-|-------------|---------|
-| ![](screenshots/calendar.jpeg) | ![](screenshots/addtask.jpeg) | 
+| Calendar | Add Task |
+|----------|----------|
+| <img src="screenshots/calendar.jpeg" width="250"> | <img src="screenshots/addtask.jpeg" width="250"> |
 
 ## 📚 What I Learned
 
