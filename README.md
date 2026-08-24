@@ -121,4 +121,12 @@ The project separates testing responsibilities between:
 
 ## 👨‍💻 Author
 
-Firas
+**Feras Saffour**
+
+Android Developer
+
+LinkedIn : https://www.linkedin.com/in/feras-saffour-317896282/
+
+GitHub : https://github.com/firassaffour
+
+Email : feras.saffour.dev@gmail.com
